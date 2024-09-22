@@ -4,6 +4,7 @@
     "eslint": "9.11.0"
   },
   "devDependencies": {
+    "@types/node": "^22.5.5",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "typescript": "^5.6.2"
@@ -15,7 +16,8 @@
     "test:bundler-preserve": "yarn test --moduleResolution Bundler --module Preserve",
     "test:node-10": "yarn test --moduleResolution Node10",
     "test:node-16": "yarn test --moduleResolution Node16 --module Node16",
-    "test:node-next": "yarn test --moduleResolution NodeNext --module NodeNext"
+    "test:node-next": "yarn test --moduleResolution NodeNext --module NodeNext",
+    "test:named-exports": "node --test tests/namedExports.test.mjs"
   },
   "packageManager": "yarn@4.5.0"
 }
