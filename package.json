@@ -1,0 +1,21 @@
+{
+  "name": "eslint-newly-ported-type-definitions-issue",
+  "dependencies": {
+    "eslint": "9.11.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "test": "yarn clean && tsc -p tsconfig.json",
+    "test:bundler-esnext": "yarn test --moduleResolution Bundler --module ESNext",
+    "test:bundler-preserve": "yarn test --moduleResolution Bundler --module Preserve",
+    "test:node-10": "yarn test --moduleResolution Node10",
+    "test:node-16": "yarn test --moduleResolution Node16 --module Node16",
+    "test:node-next": "yarn test --moduleResolution NodeNext --module NodeNext"
+  },
+  "packageManager": "yarn@4.5.0"
+}
