@@ -4,11 +4,11 @@
   "types": "dist/index.d.ts",
   "packageManager": "yarn@4.5.0",
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.47.9",
+    "@microsoft/api-extractor": "^7.47.11",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "tsup": "^8.3.0",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "type": "module",
   "scripts": {
