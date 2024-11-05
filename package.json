@@ -1,0 +1,25 @@
+{
+  "name": "eslint-js-newly-ported-type-definitions-issue",
+  "type": "module",
+  "dependencies": {
+    "@eslint/js": "^9.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "test": "node --test tests/namedExports.test.mjs",
+    "test-types": "tsc -p tsconfig.json",
+    "test:bundler-esnext": "yarn test-types --moduleResolution Bundler --module ESNext",
+    "test:bundler-preserve": "yarn test-types --moduleResolution Bundler --module Preserve",
+    "test:node-10": "yarn test-types --moduleResolution Node10 --module ESNext",
+    "test:node-16": "yarn test-types --moduleResolution Node16 --module Node16",
+    "test:node-next": "yarn test-types --moduleResolution NodeNext --module NodeNext",
+    "test:named-exports": "node --test tests/namedExports.test.mjs"
+  },
+  "packageManager": "yarn@4.5.1"
+}
