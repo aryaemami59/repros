@@ -1,0 +1,26 @@
+{
+  "name": "eslint-config-eslint-type-definitions",
+  "type": "module",
+  "dependencies": {
+    "eslint-config-eslint": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "eslint": "^9.16.0",
+    "prettier": "^3.4.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.2"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "test": "node --test tests/**",
+    "test-types": "tsc -p tsconfig.json",
+    "test:bundler-esnext": "yarn test-types --moduleResolution Bundler --module ESNext",
+    "test:bundler-preserve": "yarn test-types --moduleResolution Bundler --module Preserve",
+    "test:node-10": "yarn test-types --moduleResolution Node10 --module ESNext",
+    "test:node-16": "yarn test-types --moduleResolution Node16 --module Node16",
+    "test:node-next": "yarn test-types --moduleResolution NodeNext --module NodeNext",
+    "test:named-exports": "node --test tests/namedExports.test.mjs"
+  },
+  "packageManager": "yarn@4.5.3"
+}
