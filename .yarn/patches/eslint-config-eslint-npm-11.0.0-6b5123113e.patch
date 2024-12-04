@@ -1,0 +1,535 @@
+diff --git a/base.js b/base.js
+index d5ef44dc583708b737f41e3cfc7e25ce8083bca2..27116aab145cc8001d2ab0475cb8b427b8355a3b 100644
+--- a/base.js
++++ b/base.js
+@@ -6,6 +6,9 @@ const eslintCommentsPluginConfigs = require("@eslint-community/eslint-plugin-esl
+ const unicorn = require("eslint-plugin-unicorn");
+ 
+ // extends eslint recommended config
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ const jsConfigs = [js.configs.recommended, {
+     name: "eslint-config-eslint/js",
+     rules: {
+@@ -142,6 +145,9 @@ const jsConfigs = [js.configs.recommended, {
+ }];
+ 
+ // extends eslint-plugin-jsdoc's recommended config
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ const jsdocConfigs = [jsdoc.configs["flat/recommended"], {
+     name: "eslint-config-eslint/jsdoc",
+     settings: {
+@@ -234,6 +240,9 @@ const jsdocConfigs = [jsdoc.configs["flat/recommended"], {
+ }];
+ 
+ // extends eslint-plugin-unicorn's config
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ const unicornConfigs = [{
+     name: "eslint-config-eslint/unicorn",
+     plugins: { unicorn },
+@@ -253,6 +262,9 @@ const unicornConfigs = [{
+ }];
+ 
+ // extends @eslint-community/eslint-plugin-eslint-comments's recommended config
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ const eslintCommentsConfigs = [eslintCommentsPluginConfigs.recommended, {
+     name: "eslint-config-eslint/eslint-comments",
+     rules: {
+@@ -262,6 +274,9 @@ const eslintCommentsConfigs = [eslintCommentsPluginConfigs.recommended, {
+     }
+ }];
+ 
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ module.exports = [
+     { name: "eslint-config-eslint/base", linterOptions: { reportUnusedDisableDirectives: "error" } },
+     ...jsConfigs,
+diff --git a/cjs.js b/cjs.js
+index 61963a39bef8e9cee2cf389409d1e3cafdf63889..f50517bb12dcf6a091ca9a825ee704a7ce70d71b 100644
+--- a/cjs.js
++++ b/cjs.js
+@@ -3,6 +3,9 @@
+ const baseConfigs = require("./base");
+ const { cjsConfigs } = require("./nodejs");
+ 
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ module.exports = [
+     ...baseConfigs,
+     ...cjsConfigs
+diff --git a/formatting.js b/formatting.js
+index 56195f601e28832eb0b525032991ab85c40eb7ee..7fd7c2eadadc2760cedad00ac878f7d82aff4478 100644
+--- a/formatting.js
++++ b/formatting.js
+@@ -1,123 +1,138 @@
+ "use strict";
+ 
++/**
++ * @type {import("eslint").Linter.RulesRecord}
++ */
++const rules = {
++    "array-bracket-spacing": "error",
++    "arrow-parens": ["error", "as-needed"],
++    "arrow-spacing": "error",
++    "block-spacing": "error",
++    "brace-style": ["error", "1tbs"],
++    "comma-dangle": "error",
++    "comma-spacing": "error",
++    "comma-style": ["error", "last"],
++    "computed-property-spacing": "error",
++    "dot-location": ["error", "property"],
++    "eol-last": "error",
++    "func-call-spacing": "error",
++    "function-call-argument-newline": ["error", "consistent"],
++    "function-paren-newline": ["error", "consistent"],
++    "generator-star-spacing": "error",
++    indent: ["error", 4, { SwitchCase: 1 }],
++    "key-spacing": ["error", { beforeColon: false, afterColon: true }],
++    "keyword-spacing": "error",
++    "lines-around-comment": [
++        "error",
++        {
++            beforeBlockComment: true,
++            afterBlockComment: false,
++            beforeLineComment: true,
++            afterLineComment: false
++        }
++    ],
++    "max-len": [
++        "error",
++        160,
++        {
++            ignoreComments: true,
++            ignoreUrls: true,
++            ignoreStrings: true,
++            ignoreTemplateLiterals: true,
++            ignoreRegExpLiterals: true
++        }
++    ],
++    "max-statements-per-line": "error",
++    "new-parens": "error",
++    "no-confusing-arrow": "error",
++    "no-extra-semi": "error",
++    "no-floating-decimal": "error",
++    "no-mixed-spaces-and-tabs": ["error", false],
++    "no-multi-spaces": "error",
++    "no-multiple-empty-lines": [
++        "error",
++        {
++            max: 2,
++            maxBOF: 0,
++            maxEOF: 0
++        }
++    ],
++    "no-tabs": "error",
++    "no-trailing-spaces": "error",
++    "no-whitespace-before-property": "error",
++    "object-curly-newline": [
++        "error",
++        {
++            consistent: true,
++            multiline: true
++        }
++    ],
++    "object-curly-spacing": ["error", "always"],
++    "object-property-newline": [
++        "error",
++        {
++            allowAllPropertiesOnSameLine: true
++        }
++    ],
++    "one-var-declaration-per-line": "error",
++    "operator-linebreak": "error",
++    "padding-line-between-statements": [
++        "error",
++        {
++            blankLine: "always",
++            prev: ["const", "let", "var"],
++            next: "*"
++        },
++        {
++            blankLine: "any",
++            prev: ["const", "let", "var"],
++            next: ["const", "let", "var"]
++        }
++    ],
++    quotes: ["error", "double", { avoidEscape: true }],
++    "quote-props": ["error", "as-needed"],
++    "rest-spread-spacing": "error",
++    semi: "error",
++    "semi-spacing": [
++        "error",
++        {
++            before: false,
++            after: true
++        }
++    ],
++    "semi-style": "error",
++    "space-before-blocks": "error",
++    "space-before-function-paren": [
++        "error",
++        {
++            anonymous: "never",
++            named: "never",
++            asyncArrow: "always"
++        }
++    ],
++    "space-in-parens": "error",
++    "space-infix-ops": "error",
++    "space-unary-ops": [
++        "error",
++        {
++            words: true,
++            nonwords: false
++        }
++    ],
++    "spaced-comment": [
++        "error",
++        "always",
++        {
++            exceptions: ["-"]
++        }
++    ],
++    "switch-colon-spacing": "error",
++    "template-curly-spacing": ["error", "never"],
++    "template-tag-spacing": "error",
++    "wrap-iife": "error",
++    "yield-star-spacing": "error"
++};
++
+ module.exports = {
+-    rules: {
+-        "array-bracket-spacing": "error",
+-        "arrow-parens": ["error", "as-needed"],
+-        "arrow-spacing": "error",
+-        "block-spacing": "error",
+-        "brace-style": ["error", "1tbs"],
+-        "comma-dangle": "error",
+-        "comma-spacing": "error",
+-        "comma-style": ["error", "last"],
+-        "computed-property-spacing": "error",
+-        "dot-location": ["error", "property"],
+-        "eol-last": "error",
+-        "func-call-spacing": "error",
+-        "function-call-argument-newline": ["error", "consistent"],
+-        "function-paren-newline": ["error", "consistent"],
+-        "generator-star-spacing": "error",
+-        indent: ["error", 4, { SwitchCase: 1 }],
+-        "key-spacing": ["error", { beforeColon: false, afterColon: true }],
+-        "keyword-spacing": "error",
+-        "lines-around-comment": ["error",
+-            {
+-                beforeBlockComment: true,
+-                afterBlockComment: false,
+-                beforeLineComment: true,
+-                afterLineComment: false
+-            }
+-        ],
+-        "max-len": ["error", 160,
+-            {
+-                ignoreComments: true,
+-                ignoreUrls: true,
+-                ignoreStrings: true,
+-                ignoreTemplateLiterals: true,
+-                ignoreRegExpLiterals: true
+-            }
+-        ],
+-        "max-statements-per-line": "error",
+-        "new-parens": "error",
+-        "no-confusing-arrow": "error",
+-        "no-extra-semi": "error",
+-        "no-floating-decimal": "error",
+-        "no-mixed-spaces-and-tabs": ["error", false],
+-        "no-multi-spaces": "error",
+-        "no-multiple-empty-lines": [
+-            "error",
+-            {
+-                max: 2,
+-                maxBOF: 0,
+-                maxEOF: 0
+-            }
+-        ],
+-        "no-tabs": "error",
+-        "no-trailing-spaces": "error",
+-        "no-whitespace-before-property": "error",
+-        "object-curly-newline": ["error",
+-            {
+-                consistent: true,
+-                multiline: true
+-            }
+-        ],
+-        "object-curly-spacing": ["error", "always"],
+-        "object-property-newline": ["error",
+-            {
+-                allowAllPropertiesOnSameLine: true
+-            }
+-        ],
+-        "one-var-declaration-per-line": "error",
+-        "operator-linebreak": "error",
+-        "padding-line-between-statements": ["error",
+-            {
+-                blankLine: "always",
+-                prev: ["const", "let", "var"],
+-                next: "*"
+-            },
+-            {
+-                blankLine: "any",
+-                prev: ["const", "let", "var"],
+-                next: ["const", "let", "var"]
+-            }
+-        ],
+-        quotes: ["error", "double", { avoidEscape: true }],
+-        "quote-props": ["error", "as-needed"],
+-        "rest-spread-spacing": "error",
+-        semi: "error",
+-        "semi-spacing": ["error",
+-            {
+-                before: false,
+-                after: true
+-            }
+-        ],
+-        "semi-style": "error",
+-        "space-before-blocks": "error",
+-        "space-before-function-paren": ["error",
+-            {
+-                anonymous: "never",
+-                named: "never",
+-                asyncArrow: "always"
+-            }
+-        ],
+-        "space-in-parens": "error",
+-        "space-infix-ops": "error",
+-        "space-unary-ops": ["error",
+-            {
+-                words: true,
+-                nonwords: false
+-            }
+-        ],
+-        "spaced-comment": ["error",
+-            "always",
+-            {
+-                exceptions: ["-"]
+-            }
+-        ],
+-        "switch-colon-spacing": "error",
+-        "template-curly-spacing": ["error", "never"],
+-        "template-tag-spacing": "error",
+-        "wrap-iife": "error",
+-        "yield-star-spacing": "error"
+-    }
++    rules
+ };
+diff --git a/index.js b/index.js
+index 8717218efe7d51d7e71a1e14b75050cb79c5d486..47ca942708b362d8e05d4c5af11d69dc4b4a4ce0 100644
+--- a/index.js
++++ b/index.js
+@@ -3,6 +3,9 @@
+ const baseConfigs = require("./base");
+ const { esmConfigs, cjsConfigs } = require("./nodejs");
+ 
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ module.exports = [
+     ...baseConfigs,
+     ...esmConfigs.map(config => ({
+diff --git a/nodejs.js b/nodejs.js
+index 64102c313a5a43c6af0f3ad6719481b515e1118f..0fa76456f72ae02ef1481f134f59f65b347a5828 100644
+--- a/nodejs.js
++++ b/nodejs.js
+@@ -1,14 +1,24 @@
+ "use strict";
+ 
+-const recommendedScriptConfig = require("eslint-plugin-n/configs/recommended-script");
+-const recommendedModuleConfig = require("eslint-plugin-n/configs/recommended-module");
++const {
++    configs: {
++        "flat/recommended-script": recommendedScriptConfig,
++        "flat/recommended-module": recommendedModuleConfig
++    }
++} = require("eslint-plugin-n");
+ 
++/**
++ * @type {import("eslint").Linter.RulesRecord}
++ */
+ const sharedRules = {
+     "n/callback-return": ["error", ["cb", "callback", "next"]],
+     "n/handle-callback-err": ["error", "err"],
+     "n/prefer-node-protocol": "error"
+ };
+ 
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ const cjsConfigs = [
+     recommendedScriptConfig,
+     {
+@@ -22,6 +32,9 @@ const cjsConfigs = [
+     }
+ ];
+ 
++/**
++ * @type {import("eslint").Linter.Config[]}
++ */
+ const esmConfigs = [
+     recommendedModuleConfig,
+     {
+diff --git a/package.json b/package.json
+index 348661f1b243f2bd1ecae451e0be0d4d9d0c70cc..60c4f675c077eedbf969174590371256e06327f5 100644
+--- a/package.json
++++ b/package.json
+@@ -3,15 +3,44 @@
+   "version": "11.0.0",
+   "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
+   "description": "Default ESLint configuration for ESLint projects.",
++  "main": "./index.js",
++  "types": "./types/index.d.ts",
+   "exports": {
+     "./package.json": "./package.json",
+-    ".": "./index.js",
+-    "./base": "./base.js",
+-    "./cjs": "./cjs.js",
+-    "./formatting": "./formatting.js"
++    ".": {
++      "types": "./types/index.d.ts",
++      "default": "./index.js"
++    },
++    "./base": {
++      "types": "./types/base.d.ts",
++      "default": "./base.js"
++    },
++    "./cjs": {
++      "types": "./types/cjs.d.ts",
++      "default": "./cjs.js"
++    },
++    "./formatting": {
++      "types": "./types/formatting.d.ts",
++      "default": "./formatting.js"
++    }
++  },
++  "typesVersions": {
++    "*": {
++      "base": [
++        "./types/base.d.ts"
++      ],
++      "cjs": [
++        "./types/cjs.d.ts"
++      ],
++      "formatting": [
++        "./types/formatting.d.ts"
++      ]
++    }
+   },
+   "scripts": {
++    "lint:types": "attw --pack",
+     "test": "node ./index.js && node ./cjs.js && node ./formatting.js",
++    "test:types": "tsc -p tsconfig.json",
+     "prepublish": "npm test"
+   },
+   "files": [
+@@ -21,11 +50,13 @@
+     "cjs.js",
+     "formatting.js",
+     "index.js",
+-    "nodejs.js"
++    "nodejs.js",
++    "types"
+   ],
+   "repository": {
+     "type": "git",
+-    "url": "https://github.com/eslint/eslint"
++    "url": "https://github.com/eslint/eslint",
++    "directory": "packages/eslint-config-eslint"
+   },
+   "homepage": "https://eslint.org",
+   "bugs": "https://github.com/eslint/eslint/issues/",
+@@ -33,9 +64,22 @@
+     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
+     "@eslint/js": "^9.0.0",
+     "eslint-plugin-jsdoc": "^48.2.3",
+-    "eslint-plugin-n": "^17.2.0",
++    "eslint-plugin-n": "^17.11.1",
+     "eslint-plugin-unicorn": "^52.0.0"
+   },
++  "devDependencies": {
++    "@arethetypeswrong/cli": "^0.17.0",
++    "eslint": "^9.16.0",
++    "typescript": "^5.7.2"
++  },
++  "peerDependencies": {
++    "eslint": "^9.10.0"
++  },
++  "peerDependenciesMeta": {
++    "eslint": {
++      "optional": true
++    }
++  },
+   "keywords": [
+     "eslintconfig",
+     "eslint-config",
+diff --git a/types/base.d.ts b/types/base.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..52bd0e5061c5be07e9a8ffc9852fa4f7b5037a11
+--- /dev/null
++++ b/types/base.d.ts
+@@ -0,0 +1,5 @@
++import type { Linter } from "eslint";
++
++declare const eslintConfigESLintBase: Linter.Config[];
++
++export = eslintConfigESLintBase;
+diff --git a/types/cjs.d.ts b/types/cjs.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..0a867432f5e24bd1402a6afc2bf5250221ed7795
+--- /dev/null
++++ b/types/cjs.d.ts
+@@ -0,0 +1,5 @@
++import type { Linter } from "eslint";
++
++declare const eslintConfigESLintCJS: Linter.Config[];
++
++export = eslintConfigESLintCJS;
+diff --git a/types/formatting.d.ts b/types/formatting.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..0453e98c2950a408199fecbdf8bf0bd193dcd1ce
+--- /dev/null
++++ b/types/formatting.d.ts
+@@ -0,0 +1,7 @@
++import type { Linter } from "eslint";
++
++declare const eslintConfigESLintFormatting: Required<
++    Pick<Linter.Config, "rules">
++>;
++
++export = eslintConfigESLintFormatting;
+diff --git a/types/index.d.ts b/types/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..bf699a0f4eaa8f121d36fc6744218262a5ac7c77
+--- /dev/null
++++ b/types/index.d.ts
+@@ -0,0 +1,5 @@
++import type { Linter } from "eslint";
++
++declare const eslintConfigESLint: Linter.Config[];
++
++export = eslintConfigESLint;
+diff --git a/types/nodejs.d.ts b/types/nodejs.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..11a714de632802335236f9f1d1bd9341ea21808a
+--- /dev/null
++++ b/types/nodejs.d.ts
+@@ -0,0 +1,5 @@
++import type { Linter } from "eslint";
++
++export declare const cjsConfigs: Linter.Config[];
++
++export declare const esmConfigs: Linter.Config[];

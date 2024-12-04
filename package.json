@@ -2,7 +2,7 @@
   "name": "eslint-config-eslint-type-definitions",
   "type": "module",
   "dependencies": {
-    "eslint-config-eslint": "file:.yalc/eslint-config-eslint"
+    "eslint-config-eslint": "patch:eslint-config-eslint@npm%3A11.0.0#~/.yarn/patches/eslint-config-eslint-npm-11.0.0-6b5123113e.patch"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",

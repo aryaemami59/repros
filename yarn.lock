@@ -550,28 +550,36 @@ __metadata:
   dependencies:
     "@types/node": "npm:^22.10.1"
     eslint: "npm:^9.16.0"
-    eslint-config-eslint: "file:.yalc/eslint-config-eslint"
+    eslint-config-eslint: "patch:eslint-config-eslint@npm%3A11.0.0#~/.yarn/patches/eslint-config-eslint-npm-11.0.0-6b5123113e.patch"
     prettier: "npm:^3.4.1"
     rimraf: "npm:^6.0.1"
     typescript: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
 
-"eslint-config-eslint@file:.yalc/eslint-config-eslint::locator=eslint-config-eslint-type-definitions%40workspace%3A.":
+"eslint-config-eslint@npm:11.0.0":
   version: 11.0.0
-  resolution: "eslint-config-eslint@file:.yalc/eslint-config-eslint#.yalc/eslint-config-eslint::hash=790476&locator=eslint-config-eslint-type-definitions%40workspace%3A."
+  resolution: "eslint-config-eslint@npm:11.0.0"
   dependencies:
     "@eslint-community/eslint-plugin-eslint-comments": "npm:^4.3.0"
     "@eslint/js": "npm:^9.0.0"
     eslint-plugin-jsdoc: "npm:^48.2.3"
-    eslint-plugin-n: "npm:^17.11.1"
+    eslint-plugin-n: "npm:^17.2.0"
     eslint-plugin-unicorn: "npm:^52.0.0"
-  peerDependencies:
-    eslint: ^9.10.0
-  peerDependenciesMeta:
-    eslint:
-      optional: true
-  checksum: 10c0/f8fb635025ee411353d9fe3e45b4c61498b0f7182f4845d4eb4a5d53fc3da67892f2dc943b9b31d70b9d25f97078d596a9811f3686e68bc839a3bf882c784cd9
+  checksum: 10c0/67647d976acd37c4785e4e1d26f087bde129d891112a8094c4239f288e60b964440e1580441f0ab002ee4dbe1aa99e6225939b4fdd5b4df6a8210de3544b8416
+  languageName: node
+  linkType: hard
+
+"eslint-config-eslint@patch:eslint-config-eslint@npm%3A11.0.0#~/.yarn/patches/eslint-config-eslint-npm-11.0.0-6b5123113e.patch":
+  version: 11.0.0
+  resolution: "eslint-config-eslint@patch:eslint-config-eslint@npm%3A11.0.0#~/.yarn/patches/eslint-config-eslint-npm-11.0.0-6b5123113e.patch::version=11.0.0&hash=515f38"
+  dependencies:
+    "@eslint-community/eslint-plugin-eslint-comments": "npm:^4.3.0"
+    "@eslint/js": "npm:^9.0.0"
+    eslint-plugin-jsdoc: "npm:^48.2.3"
+    eslint-plugin-n: "npm:^17.2.0"
+    eslint-plugin-unicorn: "npm:^52.0.0"
+  checksum: 10c0/0c222102e49d0833ab87cc11488a0ba2a12f4e9baae86dc343a4b25638cbece8b67aabdb15d19ecf70906e5ad8ac0d5d86688393e1bde4ad7c83eb4f5ac3c11f
   languageName: node
   linkType: hard
 
@@ -609,7 +617,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:^17.11.1":
+"eslint-plugin-n@npm:^17.2.0":
   version: 17.14.0
   resolution: "eslint-plugin-n@npm:17.14.0"
   dependencies:
