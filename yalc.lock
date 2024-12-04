@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "packages": {
+    "eslint-config-eslint": {
+      "signature": "b3f73cbbc45d03c81dfef2eaf7501098",
+      "file": true,
+      "replaced": "^11.0.0"
+    }
+  }
+}
