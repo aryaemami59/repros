@@ -4,6 +4,8 @@ node_modules/
 .vscode/
 dist/
 build/
+.yalc/
+yalc.lock
 .eslintcache
 .yarn/*
 !.yarn/patches
