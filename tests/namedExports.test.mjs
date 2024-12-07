@@ -1,51 +1,62 @@
-import * as eslintConfigESLint from 'eslint-config-eslint'
-import * as eslintConfigESLintBase from 'eslint-config-eslint/base'
-import * as eslintConfigESLintCJS from 'eslint-config-eslint/cjs'
-import eslintConfigESLintFormattingDefault, * as eslintConfigESLintFormatting from 'eslint-config-eslint/formatting'
-console.log(Object.keys(eslintConfigESLintFormatting))
-console.log(Object.keys(eslintConfigESLintFormatting.default))
-// console.log(eslintConfigESLintFormatting)
-// console.log(eslintConfigESLintFormattingDefault)
-// import { rules } from 'eslint-config-eslint/formatting'
-// console.log(rules)
+import eslintConfigESLintDefault, * as eslintConfigESLint from 'eslint-config-eslint'
+import eslintConfigESLintBaseDefault, * as eslintConfigESLintBase from 'eslint-config-eslint/base'
+import eslintConfigESLintCJSDefault, * as eslintConfigESLintCJS from 'eslint-config-eslint/cjs'
+import * as eslintConfigESLintFormatting from 'eslint-config-eslint/formatting'
+import eslintConfigESLintFormattingDefault, {
+  rules,
+} from 'eslint-config-eslint/formatting'
 import * as assert from 'node:assert'
-import { it } from 'node:test'
+import { describe, it } from 'node:test'
 
-// console.log(
-//   [...eslintConfigESLint.default, eslintConfigESLintFormatting.rules].length,
-// )
-// console.log(
-//   [...eslintConfigESLint.default, eslintConfigESLintFormatting].length,
-// )
+describe('named exports should work in an ESM file', () => {
+  it('eslint-config-eslint', () => {
+    assert.strictEqual(typeof eslintConfigESLint, 'object')
 
-it('named exports should work in an ESM file', () => {
-  // Named exports are not resolved
-  assert.strictEqual(typeof eslintConfigESLint, 'object')
-  assert.strictEqual(typeof eslintConfigESLintBase, 'object')
-  assert.strictEqual(typeof eslintConfigESLintCJS, 'object')
-  assert.strictEqual(typeof eslintConfigESLintFormatting, 'object')
-  assert.strictEqual(typeof eslintConfigESLintFormatting.rules, 'object')
-  assert.strictEqual(typeof eslintConfigESLintFormattingDefault, 'object')
-  assert.strictEqual(typeof eslintConfigESLintFormattingDefault.rules, 'object')
-  console.log(Object.keys(eslintConfigESLintFormattingDefault))
-  console.log(Object.keys(eslintConfigESLintFormattingDefault.rules))
-  console.log(Object.keys(eslintConfigESLintFormatting))
-  console.log(Object.keys(eslintConfigESLintFormatting.default))
-  // console.log(Object.keys(eslintConfigESLintFormatting.default.rules))
-  // Should fail.
-  // console.log(Object.keys(eslintConfigESLintFormatting.rules))
-  // console.log(Object.keys(eslintConfigESLintFormatting.rules))
-  // assert.deepStrictEqual(eslintConfigESLintFormatting.default.rules, eslintConfigESLintFormatting.rules)
-  // assert.deepStrictEqual(
-  //   [...eslintConfigESLint.default, eslintConfigESLintFormatting.default.rules],
-  //   [...eslintConfigESLint.default, eslintConfigESLintFormatting.default],
-  // )
-  // console.log(eslintConfigESLintFormatting)
-  // console.log(Object.keys(eslintConfigESLintFormatting.default))
-  // console.log(Object.keys(eslintConfigESLint))
-  // console.log(Object.keys(eslintConfigESLintBase))
-  // console.log(Object.keys(eslintConfigESLintFormattingDefault))
-  // console.log(eslintConfigESLintFormatting.rules)
-  // console.log(eslintConfigESLintFormattingDefault)
-  // assert.strictEqual(typeof rules, 'object')
+    assert.ok(!Array.isArray(eslintConfigESLint))
+
+    assert.strictEqual(typeof eslintConfigESLintDefault, 'object')
+
+    assert.ok(Array.isArray(eslintConfigESLintDefault))
+  })
+
+  it('eslint-config-eslint/base', () => {
+    assert.strictEqual(typeof eslintConfigESLintBase, 'object')
+
+    assert.ok(!Array.isArray(eslintConfigESLintBase))
+
+    assert.strictEqual(typeof eslintConfigESLintBaseDefault, 'object')
+
+    assert.ok(Array.isArray(eslintConfigESLintBaseDefault))
+  })
+
+  it('eslint-config-eslint/cjs', () => {
+    assert.strictEqual(typeof eslintConfigESLintCJS, 'object')
+
+    assert.ok(!Array.isArray(eslintConfigESLintCJS))
+
+    assert.strictEqual(typeof eslintConfigESLintCJSDefault, 'object')
+
+    assert.ok(Array.isArray(eslintConfigESLintCJSDefault))
+  })
+
+  it('eslint-config-eslint/formatting', () => {
+    assert.strictEqual(typeof eslintConfigESLintFormatting, 'object')
+
+    assert.ok(!Array.isArray(eslintConfigESLintFormatting))
+
+    assert.strictEqual(typeof eslintConfigESLintFormattingDefault, 'object')
+
+    assert.ok(!Array.isArray(eslintConfigESLintFormattingDefault))
+
+    assert.strictEqual(typeof eslintConfigESLintFormatting.rules, 'object')
+
+    assert.strictEqual(typeof eslintConfigESLintFormattingDefault, 'object')
+
+    assert.strictEqual(
+      typeof eslintConfigESLintFormattingDefault.rules,
+      'object',
+    )
+
+    assert.strictEqual(typeof rules, 'object')
+  })
 })
